@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éliseu Maxado · portfólio elevado</title>
+    <!-- Font Awesome para ícones suaves -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #0b0c10;
+            color: #edf2f7;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Fonte Inter (fallback) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap');
+
+        /* Efeito de grão sutil */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wMjUiIC8+PC9zdmc+');
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.3;
+        }
+
+        /* scrollbar nativa elegante (mas vamos usar a custom para desktop) */
+        .container {
+            position: relative;
+            z-index: 5;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+            scroll-behavior: smooth;
+        }
+
+        /* HEADER FLUTUANTE + VIDRO */
+        header {
+            position: sticky;
+            top: 20px;
+            z-index: 50;
+            background: rgba(10, 12, 18, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 60px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.6), 0 0 0 1px rgba(0, 212, 255, 0.1) inset;
+            padding: 0.8rem 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(130deg, #ffffff, #a0e9ff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.2rem;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            transition: all 0.2s ease;
+            background: transparent;
+            border: 1px solid transparent;
+        }
+
+        nav ul li a:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            transform: scale(1.02);
+        }
+
+        /* seções */
+        section {
+            margin: 5rem 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        section h2 i {
+            color: #00d4ff;
+            font-size: 2.2rem;
+        }
+
+        .sobre-texto {
+            max-width: 780px;
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.02);
+            border-left: 4px solid #00d4ff;
+            padding: 1.8rem 2rem;
+            border-radius: 0 30px 30px 0;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 10px 30px -15px #000;
+        }
+
+        /* GRADE DE 10 CARDS – espetacular */
+        .projetos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .projeto-card {
+            background: #13161e;
+            border-radius: 32px;
+            padding: 1.2rem;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            border: 1px solid rgba(255,255,255,0.03);
+            box-shadow: 0 20px 35px -15px rgba(0,0,0,0.6);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projeto-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 32px;
+            padding: 2px;
+            background: linear-gradient(145deg, rgba(0,212,255,0.3), rgba(0,150,255,0) 80%);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .projeto-card:hover::after {
+            opacity: 1;
+        }
+
+        .projeto-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: transparent;
+            box-shadow: 0 30px 45px -15px #00d4ff40;
+        }
+
+        .card-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #1f2535;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            border: 1px solid #2a3145;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .projeto-card:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        /* placeholder apenas se a imagem não carregar (sem texto "projeto") */
+        .card-img .placeholder-icon {
+            font-size: 3.2rem;
+            color: #3a445b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #1b212f, #11151f);
+        }
+        /* esconde qualquer texto residual */
+        .placeholder-icon i {
+            font-style: normal;
+        }
+
+        .projeto-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            padding-left: 5px;
+        }
+
+        .projeto-card p {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            flex: 1;
+            padding-left: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1.3rem;
+            padding-left: 5px;
+        }
+
+        .tag {
+            background: #1f2a3a;
+            color: #8bdefa;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            border: 1px solid #2f3b4e;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1e2638;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 1px solid #2e3850;
+            width: fit-content;
+            margin-top: 0.2rem;
+        }
+
+        .card-link i {
+            font-size: 0.8rem;
+            transition: transform 0.2s;
+        }
+
+        .card-link:hover {
+            background: #00d4ff;
+            border-color: #00d4ff;
+            color: #0b0c10;
+        }
+
+        .card-link:hover i {
+            transform: translateX(5px);
+            color: #0b0c10;
+        }
+
+        /* contato refinado */
+        .contato-card {
+            background: rgba(18, 22, 32, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 48px;
+            padding: 2.5rem 3rem;
+            border: 1px solid #2e3a4a;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contato-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contato-info i {
+            font-size: 2.5rem;
+            color: #00d4ff;
+            background: #1d2a36;
+            padding: 1rem;
+            border-radius: 60%;
+        }
+
+        .contato-info span {
+            font-size: 1.3rem;
+            font-weight: 300;
+            word-break: break-all;
+        }
+
+        .social-links a {
+            color: #cbd5e0;
+            font-size: 1.8rem;
+            margin: 0 0.6rem;
+            transition: 0.2s;
+        }
+
+        .social-links a:hover {
+            color: #00d4ff;
+            transform: translateY(-3px);
+        }
+
+        /* LIGHT CUSTOM (mouse) */
+        .custom-light {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle at center, rgba(0,212,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.2s;
+            opacity: 0;
+        }
+
+        /* SCROLLBAR CUSTOM (desktop) */
+        .scrollbar-custom {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 100vh;
+            background: transparent;
+            z-index: 100;
+            display: none;
+        }
+
+        .scrollbar-thumb {
+            position: absolute;
+            width: 6px;
+            left: 2px;
+            background: linear-gradient(180deg, #00d4ff, #3b82f6);
+            border-radius: 20px;
+            height: 0;
+            opacity: 0.5;
+            transition: opacity 0.2s, width 0.2s;
+        }
+
+        .scrollbar-custom:hover .scrollbar-thumb {
+            opacity: 0.9;
+            width: 8px;
+            left: 1px;
+        }
+
+        /* RESPONSIVO */
+        @media (min-width: 900px) {
+            .scrollbar-custom {
+                display: block;
+            }
+            .custom-light {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+                top: 5px;
+                padding: 0.8rem 1.2rem;
+            }
+            .projetos-grid {
+                grid-template-columns: 1fr;
+            }
+            .contato-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.8rem;
+            }
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* animação fade-in */
+        .fade-up {
+            animation: fadeUp 0.7s ease forwards;
+        }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Efeito de luz que segue rato (só visível desktop) -->
+    <div class="custom-light" id="lightFollow"></div>
+
+    <!-- Barra de rolagem personalizada elegante -->
+    <div class="scrollbar-custom" id="scrollbarCustom">
+        <div class="scrollbar-thumb" id="scrollbarThumb"></div>
+    </div>
+
+    <div class="container" id="mainContainer">
+        <header>
+            <div class="logo">
+                <h1>Éliseu Maxado</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#sobre"><i class="fas fa-user-astronaut" style="margin-right: 6px;"></i>Sobre</a></li>
+                    <li><a href="#projetos"><i class="fas fa-cubes"></i> Projetos</a></li>
+                    <li><a href="#contato"><i class="fas fa-paper-plane"></i> Contato</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- SEÇÃO SOBRE -->
+        <section id="sobre">
+            <h2><i class="fas fa-sparkles"></i> Sobre mim</h2>
+            <div class="sobre-texto">
+                <p> Desenvolvedor Fullstack que atua na area WEB , e na area de criação de jogos... com dominio de JSX , React.js ,NODE , CSS, C#, NEXT.JS. 
+                    
+                    <p style="margin-top: 1.2rem;"> Atualmente explorando os limites de interatividade com JavaScript puro.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO PROJETOS – 10 CARDS (todas as imagens tentam carregar; se falharem, só ícone sem texto) -->
+        <section id="projetos">
+            <h2><i class="fas fa-code-branch"></i> Projetos em destaque</h2>
+            <div class="projetos-grid" id="projetosGrid">
+                <!-- gerado via JS -->
+            </div>
+        </section>
+
+        <!-- SEÇÃO CONTATO -->
+        <section id="contato">
+            <h2><i class="fas fa-message"></i> Vamos conversar</h2>
+            <div class="contato-card">
+                <div class="contato-info">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <span>eliseumaxado70@gmail.com</span>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/eliseucaango" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="www.linkedin.com/in/eliseu-cabango-405216265" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/desumilde_programdor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                  
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- modal / visualização refinado (igual proj.html mas integrado) -->
+    <div class="projeto-view" id="projetoView" style="position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,6,16,0.97); backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:center; z-index:200; opacity:0; visibility:hidden; transition:0.3s; padding:1rem;">
+        <div class="projeto-view-content" style="background:#13161e; border-radius:48px; max-width:950px; width:100%; max-height:90vh; overflow:auto; padding:2rem; position:relative; border:1px solid #2d3a4f;">
+            <span class="fechar" onclick="fecharProjeto()" style="position:absolute; top:25px; right:30px; font-size:3rem; cursor:pointer; color:#aaa; transition:0.2s; line-height:1;">&times;</span>
+            <img id="projetoImg" src="" alt="projeto" style="width:100%; max-height:450px; object-fit:contain; border-radius:32px; background:#1b212f; margin-bottom:1.5rem;">
+            <h2 id="projetoTitulo" style="color:#00d4ff; font-size:2rem; margin-bottom:0.8rem;">Título</h2>
+            <p id="projetoDescricao" style="color:#b0c4de; font-size:1.2rem; line-height:1.6;">Descrição</p>
+            <div style="display:flex; gap:1rem; margin-top:2rem;">
+                <span class="tag" style="font-size:1rem;">HTML/CSS</span>
+                <span class="tag" style="font-size:1rem;">JavaScript</span>
+                <span class="tag" style="font-size:1rem;">React</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // 10 projetos de exemplo (substitua imagens pelos seus caminhos)
+            const projetosData = [
+                { img: 'img/Captura de Ecrã (14).png', titulo: 'IEZUS', desc: 'Plataforma de doações', tags: ['php', 'css','MySQL' ] },
+                { img: 'img/Captura de Ecrã (17).png', titulo: 'IxiYeto', desc: 'App para  venda de terrenos', tags: ['React.js', 'Tailwind',] },
+                { img: 'img/Captura de Ecrã (16).png', titulo: 'IxiYeto', desc: 'App para  venda de terrenos', tags: ['React.js', 'Tailwind',] },
+                { img: 'img/Captura de Ecrã (48).png', titulo: 'Medicare', desc: 'Tela de login para gestão de medicos.', tags: ['React.js', 'Tailwind',] },
+                { img: 'img/Captura de Ecrã (152).png', titulo: 'Ecommerce', desc: 'Site de venda de suplementos', tags: ['Next.js', 'Prisma', 'TS'] },
+                { img: 'img/Captura de Ecrã (83).png', titulo: 'AX TORNEIOS', desc: 'Site de campeonatos de jogos.', tags: ['php', 'css','MySQL'] },
+                { img: 'img/Captura de Ecrã (148).png', titulo: 'Distrolite', desc: 'Distribuidora musical.', tags: ['React', 'Prisma', 'PostgreSQL','JS','Tailwind'] },
+                { img: 'img/Captura de Ecrã (149).png', titulo:'AX TORNEIOS', desc: 'Site de campeonatos de jogos.', tags: ['php', 'css','MySQL'] },
+                { img: 'img/Captura de Ecrã (150).png', titulo: 'TechPro', desc: 'Site de soluções Tecnologicas', tags: ['PHP', 'HTML', 'CSS'] },
+                { img: 'img/Captura de Ecrã (153).png',  titulo: 'Distrolite', desc: 'Distribuidora musical.', tags: ['React', 'Prisma', 'PostgreSQL','JS','Tailwind']}
+            ];
+
+            const grid = document.getElementById('projetosGrid');
+            if (grid) {
+                projetosData.forEach((p, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'projeto-card fade-up';
+                    card.style.animationDelay = `${idx * 0.03}s`;
+                    const imgPath = p.img;
+
+                    // **ALTERAÇÃO PRINCIPAL**: todos os cards tentam mostrar a imagem.
+                    // Se não carregar, mostra APENAS o ícone (sem texto "projeto").
+                    // O placeholder-icon agora contém só um <i> sem texto adicional.
+                    const imgHtml = `<img src="${imgPath}" alt="${p.titulo}" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'placeholder-icon\'><i class=\'fas fa-image\' style=\'font-size:3rem;\'></i></div>';">`;
+
+                    const tagsHtml = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+                    card.setAttribute('onclick', `abrirProjeto('${imgPath}', '${p.titulo}', '${p.desc}')`);
+
+                    card.innerHTML = `
+                        <div class="card-img">
+                            ${imgHtml}
+                        </div>
+                        <h3>${p.titulo}</h3>
+                        <p>${p.desc.substring(0, 55)}…</p>
+                        <div class="card-tags">
+                            ${tagsHtml}
+                        </div>
+                        <a href="#" class="card-link" onclick="event.stopPropagation();abrirProjeto('${imgPath}', '${p.titulo}', '${p.desc}')">
+                            <span>ver detalhes</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+
+            // Funções do modal
+            window.abrirProjeto = function(imgSrc, titulo, descricao) {
+                document.getElementById('projetoImg').src = imgSrc;
+                document.getElementById('projetoTitulo').innerText = titulo;
+                document.getElementById('projetoDescricao').innerText = descricao;
+                document.getElementById('projetoView').style.visibility = 'visible';
+                document.getElementById('projetoView').style.opacity = '1';
+                document.body.style.overflow = 'hidden';
+            };
+
+            window.fecharProjeto = function() {
+                document.getElementById('projetoView').style.visibility = 'hidden';
+                document.getElementById('projetoView').style.opacity = '0';
+                document.body.style.overflow = 'auto';
+            };
+
+            // fechar com ESC ou clique fora
+            document.getElementById('projetoView').addEventListener('click', function(e) {
+                if (e.target === this) fecharProjeto();
+            });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharProjeto(); });
+
+            // Efeito de luz (mouse)
+            const light = document.getElementById('lightFollow');
+            document.addEventListener('mousemove', (e) => {
+                if (window.innerWidth >= 900) {
+                    light.style.left = e.pageX + 'px';
+                    light.style.top = e.pageY + 'px';
+                }
+            });
+
+            // SCROLLBAR PERSONALIZADA
+            const thumb = document.getElementById('scrollbarThumb');
+            const scrollbar = document.getElementById('scrollbarCustom');
+
+            function updateThumb() {
+                if (window.innerWidth < 900) return;
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const visible = window.innerHeight;
+                const thumbHeight = Math.max((visible / document.documentElement.scrollHeight) * 100, 8);
+                thumb.style.height = thumbHeight + '%';
+                const thumbPos = (scrollTop / scrollHeight) * (100 - thumbHeight) || 0;
+                thumb.style.top = thumbPos + '%';
+            }
+
+            window.addEventListener('scroll', updateThumb);
+            window.addEventListener('resize', updateThumb);
+            updateThumb();
+
+            // drag na thumb
+            let dragging = false;
+            thumb.addEventListener('mousedown', (e) => { e.preventDefault(); dragging = true; });
+            window.addEventListener('mousemove', (e) => {
+                if (!dragging || window.innerWidth < 900) return;
+                const barRect = scrollbar.getBoundingClientRect();
+                const thumbH = parseFloat(thumb.style.height) / 100 * barRect.height;
+                let y = e.clientY - barRect.top - thumbH/2;
+                y = Math.max(0, Math.min(y, barRect.height - thumbH));
+                const percent = y / (barRect.height - thumbH);
+                window.scrollTo(0, percent * (document.documentElement.scrollHeight - window.innerHeight));
+            });
+            window.addEventListener('mouseup', () => dragging = false);
+
+            // suavizar links internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        })();
+    </script>
+    <!-- ajuste para imagens quebradas: garantir que o placeholder nunca mostre texto -->
+    <style>
+        .card-img img[src=""] { display: none; }
+        .card-img img[src=""] + .placeholder-icon { display: flex; }
+        .placeholder-icon { display: flex; }
+        .placeholder-icon i::before { content: "\f030"; } /* ícone de imagem do FA */
+        .projeto-view { visibility: hidden; } /* garantia */
+    </style>
+</body>
+</html>
